@@ -1,95 +1,32 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+import Link from "next/link";
+
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main className="h-screen">
+      <section className="container mx-auto p-4">
+        <div className="flex flex-col items-center justify-center h-[80vh] max-h-[800px]">
+          <div className="grid grid-cols-1 gap-4 my-4">
+            <div className="text-center">
+              <div className="brightness-150 text-[2rem] md:text-[3.625rem]  font-bold max-w-full w-[800px] mx-auto leading-tight">
+                Decentralized Stablecoin with Robust Collateral Backing
+              </div>
+              <div className="max-w-full w-[800px] mx-auto mt-8 text-md md:text-base">
+                SolidSafe redefines the DeFi landscape with an innovative approach to stablecoins, blending user-friendly accessibility with robust security measures. Imagine a realm where generating <span className="text-primary">$SUSD</span> tokens involves leveraging your <span className="text-success">$TOMO</span> without the intricate complexities of borrowing interests.
+              </div>
+            </div>
+            <div className="flex items-center justify-center gap-2">
+              <Link href="/explore">
+                <button className="btn btn-primary btn-sm">Launch App</button>
+              </Link>
+
+              <a href="https://github.com/akbaridria/cryptoshield#readme" target="_blank" rel="noopener noreferrer">
+                <button className="btn btn-link">Read more</button>
+              </a>
+            </div>
+          </div>
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      </section>
     </main>
   )
 }

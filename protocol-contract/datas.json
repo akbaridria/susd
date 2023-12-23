@@ -1,8 +1,8 @@
 {
   "pyth_address": "0x5D289Ad1CE59fCC25b6892e7A303dfFf3a9f7167",
-  "susd": "0xE919701b5362f7136B533c58f2D99d8cCb52f4CE",
-  "susd_validator": "0x190FD19a128B0Bb063ECaC456C2D30A252Dc6327",
-  "susd_stability": "0x5442466eBB91f0fB6A49B567FfbE60B56dB4765C",
+  "susd": "0x523Fb6eCa979f7A3712038004D8d31a97EB22717",
+  "susd_validator": "0x090B00B33F5351d20d6Da2418fa137ED62Ce536a",
+  "susd_stability": "0x732f731b669A36C1D3E2bc357c98c5d5c2d25327",
   "rpc": "https://rpc.testnet.tomochain.com",
   "priceID": "0xf80ba6864e3f1b36c873bcb2767079d5fb86cf04855e714b2a0f30d7e0830a24",
   "hermes": "https://hermes.pyth.network"

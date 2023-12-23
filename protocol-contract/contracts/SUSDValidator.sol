@@ -89,11 +89,11 @@ contract SUSDValidator is ReentrancyGuard, Ownable {
             uint256(int256(price.price)),
             collateralAmount + anchores[msg.sender].collateralAmount
         );
-        // uint256 maxAmount = (collateralusd * MAX_LTV) / 100;
+        uint256 maxAmount = (collateralusd * MAX_LTV) / 100;
 
-        // if ((_mintAmount + anchores[msg.sender].debt) > maxAmount) {
-        //     revert SUSDValidator_ExceedingMaxMint();
-        // }
+        if ((_mintAmount + anchores[msg.sender].debt) > maxAmount) {
+            revert SUSDValidator_ExceedingMaxMint();
+        }
 
         anchores[msg.sender].debt += _mintAmount;
         anchores[msg.sender].collateralAmount += collateralAmount;

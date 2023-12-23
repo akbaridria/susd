@@ -11,6 +11,17 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: [
+      {
+        dark: {
+          ...require("daisyui/src/theming/themes")["business"],
+          "--rounded-box": "0.25rem",
+          "--rounded-btn": "0.25rem",
+        },
+      },
+    ],
+  },
 }
 

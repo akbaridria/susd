@@ -1,0 +1,12 @@
+{
+  "menus": [
+    {
+      "title": "Borrow",
+      "path": "/borrow"
+    },
+    {
+      "title": "Loans",
+      "path": "/loans"
+    }
+  ]
+}
