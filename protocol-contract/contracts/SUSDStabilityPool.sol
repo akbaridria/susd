@@ -47,7 +47,7 @@ contract SUSDStabilityPool is ReentrancyGuard, Ownable {
             depositAmount: _amount,
             gainAmount: 0
         });
-
+        userTracker[msg.sender].push(tracker);
         tracker++;
 
         emit Deposit(msg.sender, _amount);
@@ -82,7 +82,8 @@ contract SUSDStabilityPool is ReentrancyGuard, Ownable {
         address _user,
         bytes[] calldata _priceUpdateData
     ) external payable {
-        require(_debt < i_usd.balanceOf(address(this)));
+        require(_debt <= i_usd.balanceOf(address(this)));
+        
         i_usd.approve(address(i_validator), _debt);
         (bool isSuccess, uint256 amount) = i_validator.liquidate{
             value: msg.value
@@ -119,5 +120,14 @@ contract SUSDStabilityPool is ReentrancyGuard, Ownable {
         } else {
             revert();
         }
+    }
+
+    function getUserInfo(address _user) external view returns (uint256[] memory) {
+        uint256 length = userTracker[_user].length;
+        uint256[] memory data = new uint256[](length);
+        for(uint256 i = 0; i < length; i++) {
+            data[i] = userTracker[_user][i];
+        }
+        return data;
     }
 }

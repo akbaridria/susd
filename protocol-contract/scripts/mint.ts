@@ -10,7 +10,7 @@ async function main() {
   const res = await d.getUpdateFee(priceUpdateData);
   const valid = await ethers.getContractFactory("SUSDValidator")
   const _valid = SUSDValidator__factory.connect(datas.susd_validator, valid.runner);
-  const e = await _valid.mint(ethers.parseEther("0.05"), priceUpdateData, {
+  const e = await _valid.mint(ethers.parseEther("100"), priceUpdateData, {
     gasLimit: 3_000_000,
     value: res + ethers.parseEther("1")
   })

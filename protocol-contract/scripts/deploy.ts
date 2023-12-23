@@ -2,23 +2,30 @@ import { ethers, network } from "hardhat";
 import datas from "../datas.json";
 
 async function main() {
-  // 1. deploy susd
-  // const susd = await ethers.deployContract("SUSD", ["0x694aCF4DFb7601F92A0D2a41cdEC5bf7726C7294"], {
-  //   gasLimit: 80_000_000
-  // });
-  // await susd.waitForDeployment();
-  // console.log("susd deployed at : ", susd.target);
+  const provider = new ethers.JsonRpcProvider(datas.rpc);
+  const [addr, addr1] = await ethers.getSigners()
+  const e = await provider.getTransactionCount(addr)
 
-  // 2. deploy validator
-  // const validator = await ethers.deployContract("SUSDValidator", [datas.susd, datas.pyth_address], {
-  //   gasLimit: 80_000_000
-  // })
-  // await validator.waitForDeployment()
-  // console.log("validator deployed at:", validator.target)
+  // // 1. deploy susd
+  const susd = await ethers.deployContract("SUSD", ["0x694aCF4DFb7601F92A0D2a41cdEC5bf7726C7294"], {
+    gasLimit: 80_000_000,
+    nonce: await provider.getTransactionCount(addr.address)
+  });
+  await susd.waitForDeployment();
+  console.log("susd deployed at : ", susd.target);
 
-  // 3. deploy stability
-  const stability = await ethers.deployContract("SUSDStabilityPool", [datas.susd, datas.susd_validator], {
-    gasLimit: 80_000_000
+  // // 2. deploy validator
+  const validator = await ethers.deployContract("SUSDValidator", [susd.target, datas.pyth_address], {
+    gasLimit: 80_000_000,
+    nonce: await provider.getTransactionCount(addr.address)
+  })
+  await validator.waitForDeployment()
+  console.log("validator deployed at:", validator.target)
+
+  // // 3. deploy stability
+  const stability = await ethers.deployContract("SUSDStabilityPool", [susd.target, validator.target], {
+    gasLimit: 80_000_000,
+    nonce: await provider.getTransactionCount(addr.address)
   })
   await stability.waitForDeployment()
   console.log("stability pool deployed at", stability.target);

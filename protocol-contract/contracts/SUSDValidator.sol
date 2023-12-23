@@ -18,8 +18,7 @@ contract SUSDValidator is ReentrancyGuard, Ownable {
     bytes32 private constant PRICE_ID =
         0xf80ba6864e3f1b36c873bcb2767079d5fb86cf04855e714b2a0f30d7e0830a24; // vic/usd
     uint256 private constant MAX_LTV = 75; // 75% max ltv
-    uint256 private constant LIQUIDATION_THRESHOLD = 80; //  80% liquidation threshold
-    uint256 private constant LIQUIDATOR_BONUS = 5; // 5% bonus for liquidator
+    uint256 private constant LIQUIDATION_THRESHOLD = 85; // 80% liquidation
     uint256 private constant ADD_PRECISION = 1e10;
     uint256 private constant PRECISION = 1e18;
     uint256 private constant MIN_HEALTH_FACTOR = 1e18;
@@ -90,11 +89,11 @@ contract SUSDValidator is ReentrancyGuard, Ownable {
             uint256(int256(price.price)),
             collateralAmount + anchores[msg.sender].collateralAmount
         );
-        uint256 maxAmount = (collateralusd * MAX_LTV) / 100;
+        // uint256 maxAmount = (collateralusd * MAX_LTV) / 100;
 
-        if ((_mintAmount + anchores[msg.sender].debt) > maxAmount) {
-            revert SUSDValidator_ExceedingMaxMint();
-        }
+        // if ((_mintAmount + anchores[msg.sender].debt) > maxAmount) {
+        //     revert SUSDValidator_ExceedingMaxMint();
+        // }
 
         anchores[msg.sender].debt += _mintAmount;
         anchores[msg.sender].collateralAmount += collateralAmount;
@@ -103,24 +102,21 @@ contract SUSDValidator is ReentrancyGuard, Ownable {
         emit MintedSusd(msg.sender, _mintAmount);
     }
 
-    function redeemCollateralFromSusd(
+    function addCollateral(
         uint256 _amountCollateral,
+        bytes[] calldata _priceUpdateData
+    ) external payable nonReentrant() isAnchoreExist(msg.sender) {
+        anchores[msg.sender].collateralAmount += _amountCollateral;
+        updateDataPrice(_priceUpdateData);
+    }
+
+    function burnSusd(
         uint256 _amountSusd,
         bytes[] calldata _priceUpdateData
-    ) external payable nonReentrant isAnchoreExist(msg.sender) {
-        require(anchores[msg.sender].collateralAmount >= _amountCollateral);
-        // update price
-        updateDataPrice(_priceUpdateData);
-        PythStructs.Price memory price = pyth.getPrice(PRICE_ID);
-
-        // burn susd
+    ) external {
+        require(i_usd.balanceOf(msg.sender) >= _amountSusd);
         i_usd.transferFrom(msg.sender, address(this), _amountSusd);
-        i_usd.burnSusd(_amountSusd);
-        anchores[msg.sender].debt -= _amountSusd;
-
-        // transfer collateral
-        transferCollateral(_amountCollateral, price.price);
-        emit RedeemCollateral(msg.sender, _amountCollateral, _amountSusd);
+        updateDataPrice(_priceUpdateData);
     }
 
     function redeemCollateral(
@@ -162,7 +158,14 @@ contract SUSDValidator is ReentrancyGuard, Ownable {
 
         // transfer all collateral to liquidator
         uint256 collateralAmount = anchores[_user].collateralAmount;
-        transferCollateral(collateralAmount, price.price);
+        (bool isSuccess, ) = payable(msg.sender).call{value: collateralAmount}(
+            ""
+        );
+        anchores[_user].collateralAmount = 0;
+        if (!isSuccess) {
+            revert SUSDValidator_FailedToTransferCollateral();
+        }
+
         emit Liquidation(msg.sender, _user, _amount, collateralAmount);
         return collateralAmount;
     }

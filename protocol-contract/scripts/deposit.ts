@@ -11,13 +11,12 @@ async function main() {
   const res = await d.getUpdateFee(priceUpdateData);
   const valid = await ethers.getContractFactory("SUSDValidator")
   const _valid = SUSDValidator__factory.connect(datas.susd_validator, valid.runner);
-  const susd = await ethers.getContractFactory("SUSD");
-  const _susd = SUSD__factory.connect(datas.susd, susd.runner)
   
-  const g = await _valid.redeemCollateral(ethers.parseEther("0.01"), priceUpdateData, {
-    gasLimit: 3_000_000
-  })
-  console.log(g);
+  // const g = await _valid.addCollateral(ethers.parseEther("0.01"), priceUpdateData, {
+  //   gasLimit: 3_000_000,
+  //   value: ethers.parseEther("0.01") + res
+  // })
+  // console.log(g);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
