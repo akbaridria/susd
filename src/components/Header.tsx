@@ -5,9 +5,15 @@ import Logo from "./Logo";
 import data from "@/data.json";
 import { usePathname } from "next/navigation";
 import { Arrow } from "./Icons";
-
+import ButtonAccount from "@/modules/header/ButtonAccount";
+import ButtonConnectWallet from "@/modules/header/ButtonConnectWallet";
+import { ButtonSwitchWallet } from "@/modules/header/ButtonSwitchWallet";
+import { useAccount, useNetwork } from 'wagmi'
 export const Header = () => {
   const pathname = usePathname()
+  
+  const { isConnected} = useAccount()
+  const { chain } = useNetwork()
 
   return (
     <div className="sticky top-0 z-[100]">
@@ -26,7 +32,7 @@ export const Header = () => {
                 })}
               </ul>
             </div>
-            <Link href="/" className="btn btn-ghost text-xl">
+            <Link href="/" className="btn btn-ghost">
               <Logo />
             </Link>
           </div>
@@ -48,9 +54,9 @@ export const Header = () => {
             </ul>
           </div>
           <div className="navbar-end">
-            <div className="flex items-center gap-4">
-              <button className="btn btn-primary btn-sm">Connect Wallet</button>
-            </div>
+            {chain?.unsupported && <ButtonSwitchWallet />}
+            {!isConnected && <ButtonConnectWallet />}
+            {isConnected && !chain?.unsupported && <ButtonAccount />}
           </div>
         </div>
       </div>

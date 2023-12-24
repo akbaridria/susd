@@ -7,6 +7,10 @@
     {
       "title": "Loans",
       "path": "/loans"
+    },
+    {
+      "title": "Stability Pool",
+      "path": "/stability"
     }
   ]
 }

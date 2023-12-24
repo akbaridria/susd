@@ -1,9 +1,10 @@
 {
   "pyth_address": "0x5D289Ad1CE59fCC25b6892e7A303dfFf3a9f7167",
-  "susd": "0x523Fb6eCa979f7A3712038004D8d31a97EB22717",
-  "susd_validator": "0x090B00B33F5351d20d6Da2418fa137ED62Ce536a",
-  "susd_stability": "0x732f731b669A36C1D3E2bc357c98c5d5c2d25327",
+  "susd": "0xA29Ae438320C6F2dB0A9965737a61D6a9B8cf860",
+  "susd_validator": "0xB763654525D151f3F3c2f0d0B128231b13E04da5",
+  "susd_stability": "0xe312BCe55eb1b932631C28a78296b96A49F600c5",
   "rpc": "https://rpc.testnet.tomochain.com",
   "priceID": "0xf80ba6864e3f1b36c873bcb2767079d5fb86cf04855e714b2a0f30d7e0830a24",
-  "hermes": "https://hermes.pyth.network"
+  "hermes": "https://hermes.pyth.network",
+  "block_explorer": "https://testnet.tomoscan.io"
 }

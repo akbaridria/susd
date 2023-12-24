@@ -111,12 +111,15 @@ contract SUSDValidator is ReentrancyGuard, Ownable {
     }
 
     function burnSusd(
-        uint256 _amountSusd,
-        bytes[] calldata _priceUpdateData
+        uint256 _amountSusd
     ) external {
         require(i_usd.balanceOf(msg.sender) >= _amountSusd);
         i_usd.transferFrom(msg.sender, address(this), _amountSusd);
-        updateDataPrice(_priceUpdateData);
+        if(_amountSusd > anchores[msg.sender].debt) {
+            revert();
+        }
+        i_usd.burnSusd(_amountSusd);
+        anchores[msg.sender].debt -= _amountSusd;
     }
 
     function redeemCollateral(

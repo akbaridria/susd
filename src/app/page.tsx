@@ -16,8 +16,8 @@ export default function Home() {
               </div>
             </div>
             <div className="flex items-center justify-center gap-2">
-              <Link href="/explore">
-                <button className="btn btn-primary btn-sm">Launch App</button>
+              <Link href="/borrow">
+                <button className="btn btn-primary btn-sm">Mint Now</button>
               </Link>
 
               <a href="https://github.com/akbaridria/cryptoshield#readme" target="_blank" rel="noopener noreferrer">
