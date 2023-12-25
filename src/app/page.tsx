@@ -20,7 +20,7 @@ export default function Home() {
                 <button className="btn btn-primary btn-sm">Mint Now</button>
               </Link>
 
-              <a href="https://github.com/akbaridria/cryptoshield#readme" target="_blank" rel="noopener noreferrer">
+              <a href="https://solidsafe.gitbook.io/solidsafe/" target="_blank" rel="noopener noreferrer">
                 <button className="btn btn-link">Read more</button>
               </a>
             </div>

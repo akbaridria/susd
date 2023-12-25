@@ -11,8 +11,8 @@ import { ButtonSwitchWallet } from "@/modules/header/ButtonSwitchWallet";
 import { useAccount, useNetwork } from 'wagmi'
 export const Header = () => {
   const pathname = usePathname()
-  
-  const { isConnected} = useAccount()
+
+  const { isConnected } = useAccount()
   const { chain } = useNetwork()
 
   return (
@@ -30,6 +30,14 @@ export const Header = () => {
                     <li key={item.path} className={`${pathname === item.path ? 'bg-primary rounded-box' : ''}`}><Link href={item.path}>{item.title}</Link></li>
                   )
                 })}
+                <li>
+                  <a href="https://solidsafe.gitbook.io/solidsafe/" target="_blank" rel="noopener noreferrer">
+                    <div className="flex items-center gap-1">
+                      <div>Docs</div>
+                      <Arrow customClass="w-4 h-4 rotate-[315deg]" />
+                    </div>
+                  </a>
+                </li>
               </ul>
             </div>
             <Link href="/" className="btn btn-ghost">
@@ -47,6 +55,14 @@ export const Header = () => {
                 <a href="https://faucet.testnet.tomochain.com/" target="_blank" rel="noopener noreferrer">
                   <div className="flex items-center gap-1">
                     <div>Tomo Faucet</div>
+                    <Arrow customClass="w-4 h-4 rotate-[315deg]" />
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="https://solidsafe.gitbook.io/solidsafe/" target="_blank" rel="noopener noreferrer">
+                  <div className="flex items-center gap-1">
+                    <div>Docs</div>
                     <Arrow customClass="w-4 h-4 rotate-[315deg]" />
                   </div>
                 </a>
