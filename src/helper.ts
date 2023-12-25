@@ -197,17 +197,87 @@ export const repayValidator = async (amount: bigint) => {
     abi: SUSDValidator__factory.abi,
     address: dataNetwork.susd_validator as `0x${string}`,
     functionName: "burnSusd",
-    args: [amount]
+    args: [amount],
   });
 };
 
 export const prepareAddCollateral = async (amount: bigint) => {
-  const priceData = await getUpdateDataAndFee()
+  const priceData = await getUpdateDataAndFee();
   return await prepareWriteContract({
     abi: SUSDValidator__factory.abi,
     address: dataNetwork.susd_validator as `0x${string}`,
     functionName: "addCollateral",
     args: [amount, priceData.priceData as `0x${string}`[]],
-    value: priceData.fee + amount
-  })
-}
+    value: priceData.fee + amount,
+  });
+};
+
+export const getTvlStabilityPool = async () =>
+  await readContract({
+    abi: SUSD__factory.abi,
+    address: dataNetwork.susd as `0x${string}`,
+    functionName: "balanceOf",
+    args: [dataNetwork.susd_stability as `0x${string}`],
+  });
+
+export const getTOMOStability = async () => {
+  const d = await fetchBalance({
+    address: dataNetwork.susd_stability as `0x${string}`,
+  });
+  return d;
+};
+
+export const getLatestTrackID = async () =>
+  await readContract({
+    abi: SUSDStabilityPool__factory.abi,
+    address: dataNetwork.susd_stability as `0x${string}`,
+    functionName: "tracker",
+  });
+
+export const getAllowanceStability = async (addr: string) =>
+  await readContract({
+    abi: SUSD__factory.abi,
+    address: dataNetwork.susd as `0x${string}`,
+    functionName: "allowance",
+    args: [addr as `0x${string}`, dataNetwork.susd_stability as `0x${string}`],
+  });
+
+export const approveSUSDStability = async (amount: bigint) =>
+  await prepareWriteContract({
+    abi: SUSD__factory.abi,
+    address: dataNetwork.susd as `0x${string}`,
+    functionName: "approve",
+    args: [dataNetwork.susd_stability as `0x${string}`, amount],
+  });
+
+export const depositToStability = async (amount: bigint) =>
+  await prepareWriteContract({
+    abi: SUSDStabilityPool__factory.abi,
+    address: dataNetwork.susd_stability as `0x${string}`,
+    functionName: "deposit",
+    args: [amount],
+  });
+
+export const getUserInfo = async (addr: string) =>
+  await readContract({
+    abi: SUSDStabilityPool__factory.abi,
+    address: dataNetwork.susd_stability as `0x${string}`,
+    functionName: "getUserInfo",
+    args: [addr as `0x${string}`],
+  });
+
+export const getDetailTrack = async (id: bigint) => {
+  return await readContract({
+    abi: SUSDStabilityPool__factory.abi,
+    address: dataNetwork.susd_stability as `0x${string}`,
+    functionName: "protectors",
+    args: [id],
+  });
+};
+
+export const handleWithdraw = async (id: bigint) => await prepareWriteContract({
+  abi: SUSDStabilityPool__factory.abi,
+  address: dataNetwork.susd_stability as `0x${string}`,
+  functionName: 'withdraw',
+  args: [id]
+})

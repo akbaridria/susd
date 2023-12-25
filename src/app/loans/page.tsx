@@ -273,6 +273,8 @@ const Repay = () => {
       })
       dispatch(setShow(true));
       dispatch(setTx(transactionHash))
+      const e = await getAllowanceValidator(address as `0x${string}`)
+      setAllowance(Number(e) / (10 ** 18));
       setLoadingRepay(false)
     } catch (error) {
       setLoadingRepay(false)

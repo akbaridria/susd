@@ -54,7 +54,7 @@ contract SUSDStabilityPool is ReentrancyGuard, Ownable {
     }
 
     function withdraw(uint256 _trackerId) external payable nonReentrant {
-        if (protectors[_trackerId].isExist && protectors[_trackerId].user == msg.sender) {
+        if (!protectors[_trackerId].isExist && protectors[_trackerId].user != msg.sender) {
             revert();
         }
         uint256 amountSusd = protectors[_trackerId].depositAmount;
