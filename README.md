@@ -1,36 +1,24 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# SolidSafe
 
-## Getting Started
+SolidSafe is a decentralized finance (DeFi) platform that offers a secure and stable environment for users to mint stablecoins against robust collateral without borrowing interests.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Description
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+SolidSafe introduces a pioneering DeFi solution providing stability, security, and community-driven governance. Users can mint SUSD tokens against collateral, enjoy a 75% LTV cap, and leverage a stability pool for liquidation events.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Resources
 
-## Learn More
+- [Documentation](https://solidsafe.gitbook.io/solidsafe/) - Detailed information for SolidSafe.
+- [Frontend/Demo App](https://susd.vercel.app/) - Explore SolidSafe's frontend or try out a demo of the platform's functionalities.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **Stablecoin Minting:** Lock collateral, mint SUSD tokens, and enjoy stability without borrowing interests.
+- **Repayment & Flexibility:** Repay SUSD to unlock collateral or increase your health factor within the system.
+- **Stability Pool & Liquidation:** Utilize a stability pool to cover undercollateralized positions, ensuring system stability.
